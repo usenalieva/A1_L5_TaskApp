@@ -63,9 +63,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         private ImageView imageView;
         private Button btnLogin;
         private Button btnSkip;
-        private ImageView dot1;
-        private ImageView dot2;
-        private ImageView dot3;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
