@@ -80,9 +80,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             imageView = itemView.findViewById(R.id.imageView);
             btnLogin = itemView.findViewById(R.id.btn_login);
             btnSkip = itemView.findViewById(R.id.btn_skip);
-//            dot1 = itemView.findViewById(R.id.dot1);
-//            dot2 = itemView.findViewById(R.id.dot2);
-//            dot3 = itemView.findViewById(R.id.dot3);
+
             btnLogin.setOnClickListener(v->{
                 boardListener.openMainPage();
             });
