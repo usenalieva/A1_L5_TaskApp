@@ -3,14 +3,12 @@ package com.example.taskapp.ui.home;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.R;
-import com.example.taskapp.ui.ItemViewClickListener;
 
 import java.util.ArrayList;
 
@@ -20,12 +18,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     public TaskAdapter() {
     }
-    public void setListener(ItemViewClickListener listener) {
-        this.listener = listener;
-    }
 
-    @NonNull
-    @Override
+
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_task,parent,false);
@@ -35,18 +29,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(list.get(position));
-
-        //setting Background Color for Items (orange if position is even, blue if odd)
-        if (position %2 == 0){
-            ((LinearLayout)holder.itemView).setBackgroundResource(R.color.orange_light);
-        } else {
-            ((LinearLayout)holder.itemView).setBackgroundResource(R.color.blue_light);
-        }
-
-        // setting display of position by clicking the item
-        holder.itemView.setOnClickListener(v->{
-            listener.displayPosition(position);
-        });
 
     }
 
@@ -83,6 +65,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         public void bind(String s) {
             textView.setText(s);
+
+            //setting Background Color for Items (orange if position is even, blue if odd)
+            if ( getAdapterPosition() %2 == 0){
+                itemView.setBackgroundResource(R.color.orange_light);
+            } else {
+                itemView.setBackgroundResource(R.color.blue_light);
+            }
+
+            // setting display of position by clicking the item
+            itemView.setOnClickListener(v->{
+                listener.displayPosition(getAdapterPosition());
+            });
         }
     }
 }

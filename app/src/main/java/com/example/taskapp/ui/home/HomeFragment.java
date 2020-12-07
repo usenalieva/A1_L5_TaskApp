@@ -19,7 +19,7 @@ import com.example.taskapp.R;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ItemViewClickListener {
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
     private String text;
@@ -27,7 +27,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // placing adapter here so it won't be recreating each time
+
+        // placing the adapter here so it won't be recreated each time
         adapter = new TaskAdapter();
         ArrayList<String> list = new ArrayList<>();
         list.add("Omurzak");
@@ -38,13 +39,11 @@ public class HomeFragment extends Fragment {
         list.add("Ermek");
         list.add("Daniar");
         adapter.addList(list);
-        adapter.setListener(pos -> Toast.makeText(getContext(), "Item position: " + pos, Toast.LENGTH_SHORT).show());
     }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
@@ -61,6 +60,8 @@ public class HomeFragment extends Fragment {
 
         });
         setFragmentListener();
+
+
     }
 
     private void setFragmentListener() {
@@ -69,7 +70,8 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                         text = result.getString("text");
-                        adapter.addItem(text);
+                        if (text != null)
+                            adapter.addItem(text);
                     }
                 });
     }
@@ -80,5 +82,14 @@ public class HomeFragment extends Fragment {
 
     }
 
+    // setting ItemViewCLickListener's method displaying a position
+    @Override
+    public void displayPosition(int pos) {
+        Toast.makeText(getContext(), "Item position: " + pos, Toast.LENGTH_SHORT).show();
 
+    }
+}
+
+interface ItemViewClickListener {
+    void displayPosition(int pos);
 }
