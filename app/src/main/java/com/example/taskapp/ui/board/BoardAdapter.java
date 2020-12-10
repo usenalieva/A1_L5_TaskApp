@@ -25,17 +25,17 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
 
     public BoardAdapter() {
 
-        titles.add("Fast");
-        titles.add("Free");
-        titles.add("Powerful");
+        titles.add("EXPLORE");
+        titles.add("DISCOVERY");
+        titles.add("CREATE");
 
-        desc.add("Fast Fast Fast Fast Fast Fast Fast ");
-        desc.add("Free");
-        desc.add("Powerful");
+        desc.add("EXPLORE THE UNKNOWN WORLD");
+        desc.add("DISCOVER THE BEAUTY AROUND");
+        desc.add("CREATING WIRELESS POSSIBILITIES");
 
-        photos.add(R.drawable.ic_home_black_24dp);
-        photos.add(R.drawable.ic_launcher_background);
-        photos.add(R.drawable.alima_profile);
+        photos.add(R.drawable.explore);
+        photos.add(R.drawable.discovery);
+        photos.add(R.drawable.create);
 
     }
 
@@ -62,7 +62,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         private TextView textDesc;
         private ImageView imageView;
         private Button btnLogin;
-        private Button btnSkip;
+
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -77,14 +77,12 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             textDesc = itemView.findViewById(R.id.textDesc);
             imageView = itemView.findViewById(R.id.imageView);
             btnLogin = itemView.findViewById(R.id.btn_login);
-            btnSkip = itemView.findViewById(R.id.btn_skip);
+
 
             btnLogin.setOnClickListener(v->{
                 boardListener.openMainPage();
             });
-            btnSkip.setOnClickListener(v->{
-                boardListener.openMainPage();
-            });
+//
         }
 
         public void bind(int position) {

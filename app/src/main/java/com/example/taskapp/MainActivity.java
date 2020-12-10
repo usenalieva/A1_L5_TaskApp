@@ -1,9 +1,13 @@
 package com.example.taskapp;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.utils.Prefs;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,21 +21,38 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
-    /*
-    * 1. В Board добавить кнопку на третьей странице, при нажатии перейти в главную страницу
-2. Показать точки страниц борда без сторонней библиотеки
-3. Показать кнопку SKIP на верху борда, при нажатии перейти в главную страницу
-4. Выбрать картинку из галерии и показать в профиле с помощью Glide
-* (без startActivityForResult и onActivityResult)*/
 
+/*
+1. На долгое нажатие открыть AlertDialog, c текстом об удалении, если нажать удалить из списка
+2. При нажатии на элемент из списка, открыть заполненный FormFragment для редактирования
+3. Создать меню HomeFragment, в котором будет "Очистить", при нажатии очистить SharedPreferences и выйти из приложения
+Bonus. Дизайн профиля */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initNavController();
-        navController.navigate(R.id.boardFragment);
 
+        // BoardFragment launching setUp
+        boolean isShown = new Prefs(this).isShown();
+        if (!isShown) navController.navigate(R.id.boardFragment);
+
+    }
+
+    // Menu initialization
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_clear_prefs)
+            new Prefs(this).clearPrefs();
+        return super.onOptionsItemSelected(item);
     }
 
     private void initNavController() {
@@ -45,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if (destination.getId() == R.id.navigation_home ||

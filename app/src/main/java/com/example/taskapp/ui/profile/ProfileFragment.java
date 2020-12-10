@@ -1,6 +1,5 @@
 package com.example.taskapp.ui.profile;
 
-
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.taskapp.R;
-
 
 public class ProfileFragment extends Fragment {
 
@@ -49,10 +47,8 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         profilePic = view.findViewById(R.id.imageView);
-
         profilePic.setOnClickListener(v -> {
             mGetContent.launch("image/*");
-
         });
 
     }

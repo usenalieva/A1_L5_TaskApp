@@ -15,11 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.example.taskapp.MainActivity;
 import com.example.taskapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.utils.Prefs;
 
-public class BoardFragment extends Fragment  {
+public class BoardFragment extends Fragment {
     private ViewPager2 viewPager;
     BoardAdapter adapter;
 
@@ -41,12 +43,9 @@ public class BoardFragment extends Fragment  {
         super.onViewCreated(view, savedInstanceState);
         viewPager = view.findViewById(R.id.viewPager);
         initView();
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabDots);
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {}).attach();
-
-
-
-
+        TabLayout tabLayout = view.findViewById(R.id.tabDots);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+        }).attach();
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
                 new OnBackPressedCallback(true) {
@@ -55,6 +54,13 @@ public class BoardFragment extends Fragment  {
                         requireActivity().finish();
                     }
                 });
+
+        // SKIP method
+        view.findViewById(R.id.btn_skip).setOnClickListener(v -> {
+                    new Prefs(requireContext()).saveShowStatus();
+                    ((MainActivity) requireActivity()).closeFragment();
+                }
+        );
     }
 
     public void initView() {
@@ -71,8 +77,6 @@ public class BoardFragment extends Fragment  {
         });
 
     }
-
-
 
 
 }

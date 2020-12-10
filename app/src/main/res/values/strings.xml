@@ -8,4 +8,9 @@
     <string name="save">save</string>
     <string name="please_type_your_task">Please type your task</string>
     <string name="title_profile">Profile</string>
+    <string name="skip">SKIP</string>
+    <string name="desc">Description Description Description Description Description Description</string>
+    <string name="login">LOGIN</string>
+    <string name="alima">Alima</string>
+    <string name="clear_prefs">Clear Prefs</string>
 </resources>
