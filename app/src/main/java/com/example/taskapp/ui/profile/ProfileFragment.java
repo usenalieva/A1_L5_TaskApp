@@ -30,7 +30,8 @@ public class ProfileFragment extends Fragment {
                     Glide.with(requireActivity())
                             .load(uri)
                             .centerCrop()
-                            .placeholder(R.drawable.alima_profile)
+                            .circleCrop()
+                         //  TODO make an stroke borders .frame(R.drawable.border)
                             .into(profilePic);
                 }
             });
@@ -46,11 +47,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        profilePic = view.findViewById(R.id.imageView);
+        profilePic = view.findViewById(R.id.image_view);
         profilePic.setOnClickListener(v -> {
             mGetContent.launch("image/*");
         });
-
     }
 
 

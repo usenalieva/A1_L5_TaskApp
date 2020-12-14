@@ -14,7 +14,7 @@ import com.interfaces.OnItemClickListener;
 import java.util.ArrayList;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    private ArrayList<Contact> list = new ArrayList<>();
+    private ArrayList<Note> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public TaskAdapter() {
@@ -43,12 +43,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void addList(ArrayList<Contact> list) {
+    public void addList(ArrayList<Note> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
 
-    public void addItem(Contact contact) {
+    public void addItem(Note note) {
         /*
         Adding new item to bottom of the list
         list.add(text);
@@ -56,13 +56,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
          */
 
         // adding item to top of the list
-        list.add(0, contact);
+        list.add(0, note);
         notifyItemInserted(0);
     }
 
 
-    public void editItem(Contact contact, int pos) {
-        list.set(pos, contact);
+    public void editItem(Note note, int pos) {
+        list.set(pos, note);
         notifyItemChanged(pos);
     }
 
@@ -73,8 +73,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
 
 // return Contact
-    public Contact getData(int position) {
-       return new Contact(list.get(position).getName());
+    public Note getData(int position) {
+       return new Note(list.get(position).getName());
 
     }
 
@@ -106,8 +106,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         }
 
-        public void bind(Contact contact) {
-            textView.setText(contact.getName());
+        public void bind(Note note) {
+            textView.setText(note.getName());
 
             //setting Background Color for Items (orange if position is even, blue if odd)
             if (getAdapterPosition() % 2 == 0) {

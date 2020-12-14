@@ -16,7 +16,7 @@ import android.widget.EditText;
 
 import com.example.taskapp.MainActivity;
 import com.example.taskapp.R;
-import com.example.taskapp.ui.home.Contact;
+import com.example.taskapp.ui.home.Note;
 import com.example.taskapp.ui.home.HomeFragment;
 
 
@@ -24,7 +24,7 @@ public class FormFragment extends Fragment {
     public static final String KEY_NEW_CONTACT = "contact";
     public static final String KEY_ADD = "insert a new Contact";
     private EditText editText;
-    private Contact contact;
+    private Note note;
     private String savedItem;
     private String text;
 
@@ -55,8 +55,8 @@ public class FormFragment extends Fragment {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
-                        contact = (Contact) result.getSerializable(HomeFragment.KEY_SAVED_CONTACT);
-                        savedItem = contact.getName();
+                        note = (Note) result.getSerializable(HomeFragment.KEY_SAVED_CONTACT);
+                        savedItem = note.getName();
                         editText.setText(savedItem);
                     }
                 });
@@ -76,8 +76,8 @@ public class FormFragment extends Fragment {
 
     private void editSavedItem() {
         Bundle bundle = new Bundle();
-        Contact contact = new Contact(text);
-        bundle.putSerializable(HomeFragment.KEY_EDIT_CONTACT, contact);
+        Note note = new Note(text);
+        bundle.putSerializable(HomeFragment.KEY_EDIT_CONTACT, note);
         getParentFragmentManager().setFragmentResult(HomeFragment.KEY_EDIT, bundle);
     }
 
@@ -88,8 +88,8 @@ public class FormFragment extends Fragment {
 
         // transferring info to another fragment
         Bundle bundle = new Bundle();
-        Contact contact = new Contact(text);
-        bundle.putSerializable(KEY_NEW_CONTACT, contact);
+        Note note = new Note(text);
+        bundle.putSerializable(KEY_NEW_CONTACT, note);
         getParentFragmentManager().setFragmentResult(KEY_ADD, bundle);
 
     }

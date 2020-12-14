@@ -2,10 +2,10 @@ package com.example.taskapp.ui.home;
 
 import java.io.Serializable;
 
-public class Contact implements Serializable {
+public class Note implements Serializable {
     private String name;
 
-    public Contact(String name) {
+    public Note(String name) {
         this.name = name;
     }
 

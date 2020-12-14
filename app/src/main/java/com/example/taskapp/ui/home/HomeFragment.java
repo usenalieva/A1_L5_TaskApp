@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
-    private Contact contact;
+    private Note note;
     private int pos;
     public static final String KEY_SAVED_CONTACT = "saved contact";
     public static final String KEY_SEND = "send data to FormFragment";
@@ -38,12 +38,12 @@ public class HomeFragment extends Fragment {
 
         // placing the adapter here so it won't be recreated each time
         adapter = new TaskAdapter();
-        ArrayList<Contact> list = new ArrayList<>();
-        list.add( new Contact("Michael"));
-        list.add( new Contact("Milena"));
-        list.add( new Contact("Daniel"));
-        list.add( new Contact("Jacob"));
-        list.add( new Contact("Leanne"));
+        ArrayList<Note> list = new ArrayList<>();
+        list.add( new Note("Michael"));
+        list.add( new Note("Milena"));
+        list.add( new Note("Daniel"));
+        list.add( new Note("Jacob"));
+        list.add( new Note("Leanne"));
 
         adapter.addList(list);
     }
@@ -76,17 +76,17 @@ public class HomeFragment extends Fragment {
                 getViewLifecycleOwner(), new FragmentResultListener() {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                        contact = (Contact) result.getSerializable(FormFragment.KEY_NEW_CONTACT);
-                        if (contact != null)
-                            adapter.addItem(contact);
+                        note = (Note) result.getSerializable(FormFragment.KEY_NEW_CONTACT);
+                        if (note != null)
+                            adapter.addItem(note);
                     }
                 });
 
         getParentFragmentManager().setFragmentResultListener(KEY_EDIT,
                 getViewLifecycleOwner(), (requestKey, result) -> {
-                    contact = (Contact) result.getSerializable(KEY_EDIT_CONTACT);
-                    if (contact != null)
-                        adapter.editItem(contact, pos);
+                    note = (Note) result.getSerializable(KEY_EDIT_CONTACT);
+                    if (note != null)
+                        adapter.editItem(note, pos);
                 });
     }
 
@@ -105,8 +105,8 @@ public class HomeFragment extends Fragment {
             private void saveTheData(int position) {
                 pos = position;
                 Bundle bundle = new Bundle();
-                Contact contact = adapter.getData(position);
-                bundle.putSerializable(KEY_SAVED_CONTACT, contact);
+                Note note = adapter.getData(position);
+                bundle.putSerializable(KEY_SAVED_CONTACT, note);
                 getParentFragmentManager().setFragmentResult(KEY_SEND, bundle);
             }
 

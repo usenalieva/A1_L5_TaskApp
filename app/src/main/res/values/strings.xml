@@ -6,7 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">save</string>
-    <string name="please_type_your_task">Please type your task</string>
+    <string name="please_type_your_task">Please type your note</string>
     <string name="title_profile">Profile</string>
     <string name="skip">SKIP</string>
     <string name="desc">Description Description Description Description Description Description</string>
