@@ -1,4 +1,4 @@
-package com.example.taskapp.ui.form;
+package kg.taskapp.ui.form;
 
 import android.os.Bundle;
 
@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.taskapp.MainActivity;
+import kg.taskapp.App;
+import kg.taskapp.Note;
+import kg.taskapp.ui.home.HomeFragment;
+import kg.taskapp.MainActivity;
+
 import com.example.taskapp.R;
-import com.example.taskapp.ui.home.Note;
-import com.example.taskapp.ui.home.HomeFragment;
 
 
 public class FormFragment extends Fragment {
@@ -27,7 +29,6 @@ public class FormFragment extends Fragment {
     private Note note;
     private String savedItem;
     private String text;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +57,7 @@ public class FormFragment extends Fragment {
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
                         note = (Note) result.getSerializable(HomeFragment.KEY_SAVED_CONTACT);
-                        savedItem = note.getName();
+                        savedItem = note.getNote();
                         editText.setText(savedItem);
                     }
                 });
@@ -66,31 +67,20 @@ public class FormFragment extends Fragment {
     private void save() {
         text = editText.getText().toString();
 
-        if (savedItem != null) editSavedItem();
-        else addNewItem();
+        //Log.e highlighted in red color,and is shown in all the options (except Assert)
+        Log.e("FormFragment", "text =  " + text);
+        Note note = new Note(text, System.currentTimeMillis());
+
+        // saving to Database
+        App.database.noteDao().insert(note);
+
+        // transferring info to Home fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY_NEW_CONTACT, note);
+        getParentFragmentManager().setFragmentResult(KEY_ADD, bundle);
 
         // calling the closing fragment method from MainActivity
         ((MainActivity) requireActivity()).closeFragment();
-
-    }
-
-    private void editSavedItem() {
-        Bundle bundle = new Bundle();
-        Note note = new Note(text);
-        bundle.putSerializable(HomeFragment.KEY_EDIT_CONTACT, note);
-        getParentFragmentManager().setFragmentResult(HomeFragment.KEY_EDIT, bundle);
-    }
-
-    private void addNewItem() {
-
-        //Log.e highlighted in red color,and is shown in all the options (except Assert)
-        Log.e("FormFragment", "text =  " + text);
-
-        // transferring info to another fragment
-        Bundle bundle = new Bundle();
-        Note note = new Note(text);
-        bundle.putSerializable(KEY_NEW_CONTACT, note);
-        getParentFragmentManager().setFragmentResult(KEY_ADD, bundle);
 
     }
 }

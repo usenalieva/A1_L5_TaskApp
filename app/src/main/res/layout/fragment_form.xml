@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.form.FormFragment"
+    tools:context="kg.taskapp.ui.form.FormFragment"
     android:padding="16dp">
 
     <com.google.android.material.textfield.TextInputLayout

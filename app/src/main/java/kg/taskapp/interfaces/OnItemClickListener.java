@@ -1,4 +1,4 @@
-package com.interfaces;
+package kg.taskapp.interfaces;
 
 public interface OnItemClickListener {
 

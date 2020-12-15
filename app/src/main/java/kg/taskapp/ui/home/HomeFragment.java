@@ -1,4 +1,4 @@
-package com.example.taskapp.ui.home;
+package kg.taskapp.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,16 +17,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.R;
-import com.example.taskapp.ui.form.FormFragment;
-import com.interfaces.OnItemClickListener;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import kg.taskapp.App;
+import kg.taskapp.Note;
+import kg.taskapp.ui.form.FormFragment;
+import kg.taskapp.interfaces.OnItemClickListener;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
     private Note note;
     private int pos;
+    private boolean toAdd;
     public static final String KEY_SAVED_CONTACT = "saved contact";
     public static final String KEY_SEND = "send data to FormFragment";
     public static final String KEY_EDIT_CONTACT = "edit saved contact";
@@ -38,14 +42,9 @@ public class HomeFragment extends Fragment {
 
         // placing the adapter here so it won't be recreated each time
         adapter = new TaskAdapter();
-        ArrayList<Note> list = new ArrayList<>();
-        list.add( new Note("Michael"));
-        list.add( new Note("Milena"));
-        list.add( new Note("Daniel"));
-        list.add( new Note("Jacob"));
-        list.add( new Note("Leanne"));
-
+        List<Note>  list = App.database.noteDao().getAll();
         adapter.addList(list);
+
     }
 
 
@@ -62,6 +61,7 @@ public class HomeFragment extends Fragment {
         initList();
 
         view.findViewById(R.id.fab).setOnClickListener(v -> {
+            toAdd = true;
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
             navController.navigate(R.id.action_navigation_home_to_formFragment);
 
@@ -77,16 +77,10 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                         note = (Note) result.getSerializable(FormFragment.KEY_NEW_CONTACT);
-                        if (note != null)
+                        if (toAdd)
                             adapter.addItem(note);
+                        else  adapter.editItem(note,pos);
                     }
-                });
-
-        getParentFragmentManager().setFragmentResultListener(KEY_EDIT,
-                getViewLifecycleOwner(), (requestKey, result) -> {
-                    note = (Note) result.getSerializable(KEY_EDIT_CONTACT);
-                    if (note != null)
-                        adapter.editItem(note, pos);
                 });
     }
 
@@ -98,6 +92,7 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
+                toAdd = false;
                 saveTheData(position);
                 openFormFragment();
             }

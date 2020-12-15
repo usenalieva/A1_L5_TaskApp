@@ -1,4 +1,4 @@
-package com.example.taskapp.ui.board;
+package kg.taskapp.ui.board;
 
 import android.os.Bundle;
 
@@ -15,11 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.example.taskapp.MainActivity;
+import kg.taskapp.MainActivity;
 import com.example.taskapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.utils.Prefs;
+import kg.taskapp.utils.Prefs;
 
 public class BoardFragment extends Fragment {
     private ViewPager2 viewPager;

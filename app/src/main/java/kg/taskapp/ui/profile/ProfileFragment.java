@@ -1,4 +1,4 @@
-package com.example.taskapp.ui.profile;
+package kg.taskapp.ui.profile;
 
 import android.net.Uri;
 import android.os.Bundle;

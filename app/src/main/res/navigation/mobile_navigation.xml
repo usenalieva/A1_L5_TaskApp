@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.taskapp.ui.home.HomeFragment"
+        android:name="kg.taskapp.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -18,28 +18,28 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.taskapp.ui.dashboard.DashboardFragment"
+        android:name="kg.taskapp.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.taskapp.ui.notifications.NotificationsFragment"
+        android:name="kg.taskapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.example.taskapp.ui.form.FormFragment"
+        android:name="kg.taskapp.ui.form.FormFragment"
         android:label="fragment_form"
         tools:layout="@layout/fragment_form" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.taskapp.ui.profile.ProfileFragment"
+        android:name="kg.taskapp.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/boardFragment"
-        android:name="com.example.taskapp.ui.board.BoardFragment"
+        android:name="kg.taskapp.ui.board.BoardFragment"
         android:label="fragment_board"
         tools:layout="@layout/fragment_board" >
         <action

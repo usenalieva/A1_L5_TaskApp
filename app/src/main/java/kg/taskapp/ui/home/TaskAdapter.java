@@ -1,4 +1,4 @@
-package com.example.taskapp.ui.home;
+package kg.taskapp.ui.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.R;
-import com.interfaces.OnItemClickListener;
+
+import kg.taskapp.Note;
+import kg.taskapp.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    private ArrayList<Note> list = new ArrayList<>();
+    private List<Note> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public TaskAdapter() {
@@ -43,7 +46,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void addList(ArrayList<Note> list) {
+    public void addList(List<Note> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -74,7 +77,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
 // return Contact
     public Note getData(int position) {
-       return new Note(list.get(position).getName());
+       return new Note(list.get(position).getNote(), System.currentTimeMillis());
 
     }
 
@@ -107,7 +110,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         }
 
         public void bind(Note note) {
-            textView.setText(note.getName());
+            textView.setText(note.getNote());
 
             //setting Background Color for Items (orange if position is even, blue if odd)
             if (getAdapterPosition() % 2 == 0) {

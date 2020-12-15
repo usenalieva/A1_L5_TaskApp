@@ -1,4 +1,4 @@
-package com.example.taskapp;
+package kg.taskapp;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -6,8 +6,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.taskapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.utils.Prefs;
+import kg.taskapp.utils.Prefs;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.utils;
+package kg.taskapp.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
